@@ -8,22 +8,22 @@ services:
     depends_on:
       - postgres
       - redis
-  postgres:
-    image: postgres
-    restart: always
-    volumes:
-      - postgres-db:/var/lib/postgresql
-    environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: example
-  # mongo:
-  #   image: mongo:4.4
+  # postgres:
+  #   image: postgres
   #   restart: always
   #   volumes:
-  #     - mongo-db:/data/db
+  #     - postgres-db:/var/lib/postgresql
   #   environment:
-  #     MONGO_INITDB_ROOT_USERNAME: root
-  #     MONGO_INITDB_ROOT_PASSWORD: example
+  #     POSTGRES_USER: root
+  #     POSTGRES_PASSWORD: example
+  mongo:
+    image: mongo:4.4
+    restart: always
+    volumes:
+      - mongo-db:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
   # mongo-express:
   #   image: mongo-express
   #   restart: always
