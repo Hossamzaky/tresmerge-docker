@@ -8,14 +8,14 @@ services:
     depends_on:
       - mongo
       - redis
-  postgres:
-    image: postgres
-    restart: always
-    volumes:
-      - postgres-db:/var/lib/postgresql
-    environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: example
+  # postgres:
+  #   image: postgres
+  #   restart: always
+  #   volumes:
+  #     - postgres-db:/var/lib/postgresql
+  #   environment:
+  #     POSTGRES_USER: root
+  #     POSTGRES_PASSWORD: example
   mongo:
     image: mongo:4.4
     restart: always
@@ -49,4 +49,4 @@ services:
     
 volumes:
   mongo-db:
-  postgres-db:
+  # postgres-db:
