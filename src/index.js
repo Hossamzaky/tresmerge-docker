@@ -1,7 +1,9 @@
 const express = require('express');
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const redis = require('redis');
-const { Client } = require('pg');
+const os = require('os');
+// const { log } = require('console');
+// const { Client } = require('pg');
 
 // init app
 const PORT = process.env.PORT || 4000;
@@ -17,47 +19,36 @@ redisClient.on("connect", () => console.log("Connected to redis..."));
 redisClient.connect();
 
 // connect db
-const DB_USER = 'root';
-const DB_PASSWORD = 'example';
-const DB_PORT = 5432;
-const DB_HOST = 'postgres';
-
-const URI = `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}`;
-
-const client = new Client({
-    connectionString: URI,
-});
-client
-    .connect()
-    .then(() => console.log('connected to postgres db...'))
-    .catch((err) => console.log('failed to connect to postgres db: ', err));
-
-
-
-
-
-
-
-
-
-
-
-
-
 // const DB_USER = 'root';
 // const DB_PASSWORD = 'example';
-// const DB_PORT = 27017;
-// const DB_HOST = 'mongo';
+// const DB_PORT = 5432;
+// const DB_HOST = 'postgres';
 
-// const URI = `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}`;
-// mongoose
-//     .connect(URI)
-//     .then(() => console.log('connected to db...'))
-//     .catch((err) => console.log('failed to connect to db: ', err));
+// const URI = `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}`;
+
+// const client = new Client({
+//    connectionString: URI,
+// });
+// client
+//    .connect()
+//   .then(() => console.log('connected to postgres db...'))
+//    .catch((err) => console.log('failed to connect to postgres db: ', err));
+
+const DB_USER = 'root';
+const DB_PASSWORD = 'example';
+const DB_PORT = 27017;
+const DB_HOST = 'mongo';
+
+const URI = `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}`;
+mongoose
+     .connect(URI)
+     .then(() => console.log('connected to db...'))
+     .catch((err) => console.log('failed to connect to db: ', err));
 
 app.get('/', (req, res) => {
     redisClient.set('products', 'products...');
-    res.send('<h1> Hello Tresmerge from AWS, using docker hub</h1>')
+    console.log(`traffic from ${os.hostname}`);
+    res.send('<h1> Hello Tresmerge with swarm 22</h1>')
 });
 
 app.get('/data', async (req, res) => {
